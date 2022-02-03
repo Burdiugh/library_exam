@@ -1,5 +1,6 @@
 ﻿using library.data.Data.Interfaces;
 using library.data.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,16 @@ namespace library.data.Data.Classes
             context.Add(client);
             context.SaveChanges();
         }
+
+        public void AddSale(Sales sale)
+        {
+            using AppDbContext context = new AppDbContext();
+            context.Add(sale);
+            
+            context.SaveChanges();
+        }
+
+        
 
         public void DeleteBook(Book book)
         {
@@ -58,7 +69,12 @@ namespace library.data.Data.Classes
             var book = context.Books.Where(b => b.Id == id).FirstOrDefault();
             return book;
         }
-
+        public List<Book> GetBooksByGenre(string genre)
+        {
+            using AppDbContext context = new AppDbContext();
+            var books = context.Books.Where(b => b.Genre == genre).ToList();
+            return books;
+        }
         public Book GetBook(string name)
         {
             using AppDbContext context = new AppDbContext();
@@ -94,7 +110,50 @@ namespace library.data.Data.Classes
             return clients;
         }
 
-        
+        public List<Sales> GetSales()
+        {
+            using AppDbContext context = new AppDbContext();
+            var sales = context.Sales.Include(s=>s.Book).Include(s=>s.Client).ToList();
+            return sales;
+        }
 
+        public List<Book> GetBooksByDate(DateTime date)
+        {
+            using AppDbContext context = new AppDbContext();
+            var books = context.Books.Where(b=>b.TheYearOfPublishing>date).ToList();
+            return books;
+        }
+
+        public void Discount(string genre)
+        {
+            using AppDbContext context = new AppDbContext();
+            var books = GetBooksByGenre(genre);
+            foreach (var book in books)
+            {
+                book.Price = (int)(book.Price * 0.90);
+                context.Update(book);
+                context.SaveChanges();
+            }
+           
+        }
+        public void SetOverprice(string genre)
+        {
+            using AppDbContext context = new AppDbContext();
+            var books = GetBooksByGenre(genre);
+            foreach (var book in books)
+            {
+                book.Price = (int)(book.Price / 0.90);
+                context.Update(book);
+                context.SaveChanges();
+            }
+        }
+
+        void ILibraryRepository.UpdateClientsValueOfMOney(Client client, int money)
+        {
+            using AppDbContext context = new AppDbContext();
+            client.ValueOfMoney = money;
+            context.Update(client);
+            context.SaveChanges();
+        }
     }
 }

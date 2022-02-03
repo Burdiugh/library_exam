@@ -19,20 +19,13 @@ namespace library_exam
 
         LibraryService _libraryService = new LibraryService(new LibraryRepository());
         List<Book> books;
-        List<Client> clients;
         public Form1()
         {
             InitializeComponent();
             books = _libraryService.GetBooks();
-            clients = _libraryService.GetClients();
             UpdateBooks();
-            UpdateClients();
         }
-        void UpdateClients()
-        {
-            listClients.DataSource = null;
-            listClients.DataSource = clients;
-        }
+
         void UpdateBooks()
         {
             listBooks.DataSource = null;
@@ -41,22 +34,25 @@ namespace library_exam
 
         private void btnAddBook_Click(object sender, EventArgs e)
         {
-            Book book = new Book();
-            BooksWindow bookWindow = new BooksWindow(book);
-            try
+           
+            BooksWindow bookWindow = new BooksWindow();
+
+            bookWindow.ShowDialog();
+            if (bookWindow.DialogResult == DialogResult.OK)
             {
-                bookWindow.ShowDialog();
-                if (bookWindow.DialogResult == DialogResult.OK)
+                try
                 {
-                    _libraryService.AddBook(book);
-                    books.Add(book);
+                    _libraryService.AddBook(bookWindow._book);
+                    books.Add(bookWindow._book);
                     UpdateBooks();
                 }
+                catch (Exception ex)
+                { 
+                    MessageBox.Show(ex.Message);
+                }
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
         }
 
         private void btnDeleteBook_Click(object sender, EventArgs e)
@@ -79,8 +75,6 @@ namespace library_exam
             {
                 MessageBox.Show("Doesn't exiist!");
             }
-
-
         }
 
         private void listBooks_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -103,60 +97,6 @@ namespace library_exam
 
         }
 
-        private void btnRemoveClient_Click(object sender, EventArgs e)
-        {
-            var client = listClients.SelectedItem as Client;
-            if (client != null)
-            {
-                try
-                {
-                    _libraryService.DeleteClient(client);
-                    clients.Remove(client);
-                    UpdateClients();
-                }
-                catch (Exception ex)
-                { 
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
 
-        private void btnAddClient_Click(object sender, EventArgs e)
-        {
-            Client client = new Client();
-            ClientsWindow clientsWindow = new ClientsWindow(client);
-            try
-            {
-                clientsWindow.ShowDialog();
-                if (clientsWindow.DialogResult == DialogResult.OK)
-                {
-                    _libraryService.AddClient(client);
-                    clients.Add(client);
-                    UpdateClients();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private void listClients_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            var client = listClients.SelectedItem as Client;
-            if (client != null)
-            {
-                ClientsWindow clientsWindow = new ClientsWindow(client);
-                clientsWindow.ShowDialog();
-                if (clientsWindow.DialogResult == DialogResult.OK)
-                {
-                    clients.Remove(client);
-                    _libraryService.EditClient(client);
-                    clients.Add(client);
-                }
-                UpdateClients();
-            }
-        }
     }
 }

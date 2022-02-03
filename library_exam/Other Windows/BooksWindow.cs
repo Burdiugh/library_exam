@@ -13,7 +13,11 @@ namespace library_exam.Other_Windows
 {
     public partial class BooksWindow : Form
     {
-        Book _book;
+        public Book _book = new Book();
+        public BooksWindow()
+        {
+            InitializeComponent();
+        }
         public BooksWindow(Book book)
         {
             InitializeComponent();

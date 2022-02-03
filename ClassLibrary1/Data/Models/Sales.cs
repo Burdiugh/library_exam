@@ -13,8 +13,14 @@ namespace library.data.Data.Models
         public Book Book { get; set; }
         public int ClientId { get; set; }
         public Client Client { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
 
+        //public Sales(int idBook, int idClient)
+        //{
+        //    BookId = idBook;
+        //    ClientId = idClient;
+        //}
 
     }
 }

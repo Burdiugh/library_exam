@@ -23,7 +23,6 @@ namespace library.data
         {
             modelBuilder.Entity<Sales>().HasOne(s => s.Client).WithMany(c => c.Sales).HasForeignKey(s => s.ClientId);
             modelBuilder.Entity<Sales>().HasOne(s => s.Book).WithMany(b => b.Sales).HasForeignKey(s => s.BookId);
-
         }
        
 

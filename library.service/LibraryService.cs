@@ -39,7 +39,7 @@ namespace library.service
         {
             return _libraryRepository.GetBook(id);
         }
-         public Book GetBook(string name)
+        public Book GetBook(string name)
         {
             return _libraryRepository.GetBook(name);
         }
@@ -48,31 +48,65 @@ namespace library.service
         {
             return _libraryRepository.GetClient(id);
         }
-         public Client GetClient(string name)
+        public Client GetClient(string name)
         {
             return _libraryRepository.GetClient(name);
         }
 
         public void DeleteBook(Book book)
         {
-          _libraryRepository.DeleteBook(book);  
+            _libraryRepository.DeleteBook(book);
         }
         public void DeleteClient(Client client)
         {
             _libraryRepository.DeleteClient(client);
         }
 
-        public void EditBook(Book book) 
-        { 
-        _libraryRepository.EditBook(book);
+        public void EditBook(Book book)
+        {
+            _libraryRepository.EditBook(book);
         }
 
-         public void EditClient(Client client) 
-        { 
-        _libraryRepository.EditClient(client);
+        public void EditClient(Client client)
+        {
+            _libraryRepository.EditClient(client);
         }
 
+        public void AddSales(Book book, Client client)
+        {
 
+            Sales sale = new Sales()
+            {
+                BookId = book.Id,
+                ClientId = client.Id
+            };
+            _libraryRepository.UpdateClientsValueOfMOney(client,client.ValueOfMoney-book.Price);
+            _libraryRepository.AddSale(sale);
+        }
+
+        public List<Sales> GetSales()
+        {
+            return _libraryRepository.GetSales();
+        }
+
+        public List<Book> GetBooksByDate(DateTime date)
+        {
+            return _libraryRepository.GetBooksByDate(date);
+        }
+        public List<Book> GetBooksByGenre(string genre)
+        {
+            return _libraryRepository.GetBooksByGenre(genre);
+        }
+
+        public void Discount(string genre)
+        {
+            _libraryRepository.Discount(genre);
+        }
+
+        public void SetOverprice(string genre)
+        {
+            _libraryRepository.SetOverprice(genre);
+        }
 
 
     }

@@ -15,6 +15,7 @@ namespace library.data.Data.Interfaces
         void AddBook(Book book);
         void AddClient(Client client);
         Book GetBook(int id);
+        List<Book> GetBooksByGenre(string genre);
         Book GetBook(string Name);
         Client GetClient(int id);
         Client GetClient(string Name);
@@ -22,9 +23,19 @@ namespace library.data.Data.Interfaces
         void DeleteClient(Client client);
         void EditBook(Book book);
         void EditClient(Client client);
+        void AddSale(Sales sale);
+        List<Sales> GetSales();
+        List<Book> GetBooksByDate(DateTime date);
+        void Discount(string genre);
+        void SetOverprice(string genre);
+        void UpdateClientsValueOfMOney(Client client, int money);
 
-        
-        
+
+
+
+
+
+
 
     }
 }

@@ -13,7 +13,12 @@ namespace library_exam.Other_Windows
 {
     public partial class ClientsWindow : Form
     {
-        Client _client;
+        public Client _client = new Client();
+
+        public ClientsWindow()
+        {
+            InitializeComponent();
+        }
         public ClientsWindow(Client client)
         {
             InitializeComponent();

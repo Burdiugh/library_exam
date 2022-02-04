@@ -24,6 +24,9 @@ namespace library_exam
             InitializeComponent();
             books = _libraryService.GetBooks();
             UpdateBooks();
+            comboBox.Items.Add("Name");
+            comboBox.Items.Add("Price des");
+            comboBox.Items.Add("Price asc");
         }
 
         void UpdateBooks()
@@ -97,6 +100,54 @@ namespace library_exam
 
         }
 
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            if (comboBox.SelectedIndex != -1)
+            {
+                var strCombo = comboBox.SelectedItem.ToString();
+                if (strCombo == "Price asc")
+                {
 
+                    try
+                    {
+                        books = _libraryService.GetSortedBooksAsc();
+                        UpdateBooks();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+                else if (strCombo == "Price des")
+                {
+                    try
+                    {
+                        books = _libraryService.GetSortedBooksDes();
+                        UpdateBooks();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else if (strCombo == "Name")
+                {
+                    try
+                    {
+                        books = _libraryService.GetSortedBooksByNames();
+                        UpdateBooks();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select something!");
+            }
+        }
     }
 }

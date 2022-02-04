@@ -29,6 +29,10 @@ namespace library.data.Data.Interfaces
         void Discount(string genre);
         void SetOverprice(string genre);
         void UpdateClientsValueOfMOney(Client client, int money);
+        List<Book> GetSortedBooksByAsc();
+        List<Book> GetSortedBooksByDes();
+        List<Book> GetSortedBooksByNames();
+
 
 
 

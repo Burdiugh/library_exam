@@ -108,6 +108,20 @@ namespace library.service
             _libraryRepository.SetOverprice(genre);
         }
 
+        public List<Book> GetSortedBooksAsc()
+        {
+           return _libraryRepository.GetSortedBooksByAsc();
+        }
+         public List<Book> GetSortedBooksDes()
+        {
+           return _libraryRepository.GetSortedBooksByDes();
+        }
+        
+       public List<Book> GetSortedBooksByNames()
+        {
+            return _libraryRepository.GetSortedBooksByNames();
+        }
+
 
     }
 }

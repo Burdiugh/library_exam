@@ -16,11 +16,7 @@ namespace library.data.Data.Models
         public DateTime Date { get; set; } = DateTime.Now;
 
 
-        //public Sales(int idBook, int idClient)
-        //{
-        //    BookId = idBook;
-        //    ClientId = idClient;
-        //}
+       
 
     }
 }

@@ -31,6 +31,8 @@
             this.btnAddBook = new System.Windows.Forms.Button();
             this.btnDeleteBook = new System.Windows.Forms.Button();
             this.listBooks = new System.Windows.Forms.ListBox();
+            this.btnSort = new System.Windows.Forms.Button();
+            this.comboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnAddBook
@@ -57,17 +59,38 @@
             // 
             this.listBooks.FormattingEnabled = true;
             this.listBooks.ItemHeight = 15;
-            this.listBooks.Location = new System.Drawing.Point(12, 12);
+            this.listBooks.Location = new System.Drawing.Point(12, 42);
             this.listBooks.Name = "listBooks";
-            this.listBooks.Size = new System.Drawing.Size(194, 334);
+            this.listBooks.Size = new System.Drawing.Size(194, 304);
             this.listBooks.TabIndex = 9;
             this.listBooks.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBooks_MouseDoubleClick);
+            // 
+            // btnSort
+            // 
+            this.btnSort.Location = new System.Drawing.Point(15, 9);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(82, 23);
+            this.btnSort.TabIndex = 10;
+            this.btnSort.Text = "Sort by";
+            this.btnSort.UseVisualStyleBackColor = true;
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
+            // 
+            // comboBox
+            // 
+            this.comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Location = new System.Drawing.Point(103, 10);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(103, 23);
+            this.comboBox.TabIndex = 11;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(306, 353);
+            this.Controls.Add(this.comboBox);
+            this.Controls.Add(this.btnSort);
             this.Controls.Add(this.listBooks);
             this.Controls.Add(this.btnDeleteBook);
             this.Controls.Add(this.btnAddBook);
@@ -81,5 +104,7 @@
         private System.Windows.Forms.Button btnAddBook;
         private System.Windows.Forms.Button btnDeleteBook;
         private System.Windows.Forms.ListBox listBooks;
+        private System.Windows.Forms.Button btnSort;
+        private System.Windows.Forms.ComboBox comboBox;
     }
 }

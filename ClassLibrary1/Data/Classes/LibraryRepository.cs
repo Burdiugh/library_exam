@@ -155,5 +155,26 @@ namespace library.data.Data.Classes
             context.Update(client);
             context.SaveChanges();
         }
+
+        public List<Book> GetSortedBooksByAsc()
+        {
+            using AppDbContext context = new AppDbContext();
+            var books = context.Books.OrderBy(b => b.Price).ToList();
+            return books;
+        }
+
+        public List<Book> GetSortedBooksByDes()
+        {
+            using AppDbContext context = new AppDbContext();
+            var books = context.Books.OrderByDescending(b => b.Price).ToList();
+            return books;
+        }
+
+        public List<Book> GetSortedBooksByNames()
+        {
+            using AppDbContext context = new AppDbContext();
+            var books = context.Books.OrderBy(b => b.Name).ToList();
+            return books;
+        }
     }
 }
